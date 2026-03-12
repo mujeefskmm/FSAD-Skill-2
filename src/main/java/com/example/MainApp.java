@@ -9,41 +9,24 @@ public class MainApp {
 
         StudentDAO dao = new StudentDAO();
 
-        // CREATE
-        Student s1 = new Student("RAMA", "Hyderabad");
-        dao.saveStudent(s1);
-        
-        Student s3 = new Student("SAIRAM", "Guntur");
-        dao.saveStudent(s3);
-        
-        int generatedId = s1.getId(); // ID after save
-        System.out.println("Generated ID = " + generatedId);
+        // Insert sample students
+        dao.saveStudent(new Student("RAMA", "Hyderabad"));
+        dao.saveStudent(new Student("SAIRAM", "Guntur"));
+        dao.saveStudent(new Student("ARJUN", "Chennai"));
+        dao.saveStudent(new Student("ANIL", "Vijayawada"));
+        dao.saveStudent(new Student("MOHAN", "Delhi"));
 
-        // READ
-        Student s2 = dao.getStudent(generatedId);
-        if (s2 != null) {
-            System.out.println("Student: " + s2.getName());
-        } else {
-            System.out.println("Student not found.");
-        }
+        System.out.println("Students inserted successfully!");
 
-        // UPDATE
-        if (s2 != null) {
-            s2.setCity("Vijayawada");
-            dao.updateStudent(s2);
-            System.out.println("Updated City to Vijayawada");
-        }
+        // HQL Operations
+        dao.sortStudentsByName();
+        dao.getFirstThreeStudents();
+        dao.countStudents();
+        dao.findStudentsStartingWithA();
+        dao.sortStudentsByCityDesc();
+        dao.groupStudentsByCity();
+        dao.findMinMaxId();
 
-        // DELETE
-        boolean deleted = dao.deleteStudent(generatedId);
-
-        if (deleted) {
-            System.out.println("Student deleted successfully.");
-        } else {
-            System.out.println("Student not found for delete.");
-        }
-
-        System.out.println("CRUD Completed!");
+        System.out.println("HQL Operations Completed!");
     }
 }
-
